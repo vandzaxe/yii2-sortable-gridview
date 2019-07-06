@@ -73,7 +73,7 @@ $dataProvider->pagination = false;
 ### SortableAction
 example:
 ```php
-use richardfan\sortable\SortableAction;
+use vandzaxe\sortable\SortableAction;
 
 public function actions(){
     return [
@@ -95,7 +95,7 @@ public function actions(){
 ### SortableGridView
 example:
 ```php
-use richardfan\sortable\SortableGridView;
+use vandzaxe\sortable\SortableGridView;
 
 <?= SortableGridView::widget([
     'dataProvider' => $dataProvider,
