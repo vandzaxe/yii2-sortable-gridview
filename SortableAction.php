@@ -1,6 +1,6 @@
 <?php
 
-namespace richardfan\sortable;
+namespace vandzaxe\sortable;
 
 use yii\base\Action;
 use yii\web\HttpException;
@@ -37,11 +37,14 @@ class SortableAction extends Action {
         }
         if (isset($_POST['items']) && is_array($_POST['items'])) {
             $activeRecordClassName = $this->activeRecordClassName;
+            $startNumber = $_POST['startNumber'];
+            $incrementalNumber = $_POST['incrementalNumber'];
+
             foreach ($_POST['items'] as $i=>$item) {
                 $page = $activeRecordClassName::findOne($item);
                 //$page = $activeRecordClassName::find()->where($item);
                 $page->updateAttributes([
-                    $this->orderColumn => $i,
+                    $this->orderColumn => ($i * $incrementalNumber) + $startNumber,
                 ]);
             }
         }

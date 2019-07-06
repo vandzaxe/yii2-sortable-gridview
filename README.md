@@ -13,21 +13,21 @@ This extension render a sortable GridView which you can drag and drop the record
 ### Installing
 Install with Composer:
 
-    composer require richardfan1126/yii2-sortable-gridview "*"
+    composer require vandzaxe/yii2-sortable-gridview "*"
 
 or
 
-    php composer.phar require richardfan1126/yii2-sortable-gridview "*"
+    php composer.phar require vandzaxe/yii2-sortable-gridview "*"
 
 or add
 
-    "richardfan1126/yii2-sortable-gridview":"*"
+    "vandzaxe/yii2-sortable-gridview":"*"
 to the require section of your composer.json file.
 
 ### Setting up SortableAction
 In your controller, add the SortableAction into action():
 ```php
-use richardfan\sortable\SortableAction;
+use vandzaxe\sortable\SortableAction;
 
 public function actions(){
     return [
@@ -44,7 +44,7 @@ public function actions(){
 ### Setting up SortableGridView
 In the view file, use SortableGridView as using the Yii default GridView
 ```php
-use richardfan\sortable\SortableGridView;
+use vandzaxe\sortable\SortableGridView;
 
 <?= SortableGridView::widget([
     'dataProvider' => $dataProvider,
@@ -52,6 +52,10 @@ use richardfan\sortable\SortableGridView;
     // you can choose how the URL look like,
     // but it must match the one you put in the array of controller's action()
     'sortUrl' => Url::to(['sortItem']),
+    // The starting number of the sort. Default sort starts at 0.
+    'startNumber' => 0,
+    // The incremental number of the sort. Default increment is 1.
+    'incrementalNumber' => 1,
     
     'columns' => [
         // Data Columns
@@ -98,6 +102,8 @@ use richardfan\sortable\SortableGridView;
     
     // SortableGridView Configurations
     'sortUrl' => Url::to(['sortItem']),
+    'startNumber' => 0,
+    'incrementalNumber' => 1,
     'sortingPromptText' => 'Loading...',
     'failText' => 'Fail to sort',
     
@@ -108,6 +114,8 @@ use richardfan\sortable\SortableGridView;
 ```
 
 * **sortUrl**  (required) The URL link to the SortableAction defined in controller's action().
+* **startNumber**  (optional) The starting number of the sort. Default to 0.
+* **incrementalNumber**  (optional) The incremental number of the sort. Default to 1.
 * **sortingPromptText**  (optional) The text shown in the model while the server is reordering model. You can use HTML tag in this attribute. Default to "Loading...".
 * **failText**  (optional) The text shown in alert box when sorting failed. Default to "Fail to sort".
 

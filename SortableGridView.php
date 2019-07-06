@@ -1,6 +1,6 @@
 <?php
 
-namespace richardfan\sortable;
+namespace vandzaxe\sortable;
 
 use Closure;
 
@@ -14,7 +14,7 @@ class SortableGridView extends GridView {
     /**
      * (required) The URL of related SortableAction
      *
-     * @see \richardfan1126\sortable\SortableAction
+     * @see \vandzaxe\sortable\SortableAction
      * @var string
      */
     public $sortUrl;
@@ -34,11 +34,34 @@ class SortableGridView extends GridView {
      */
     public $failText = 'Fail to sort';
 
+    /**
+     * (optional) Starting order number.
+     *
+     * @var int
+     */
+    public $startNumber = 0;
+
+    /**
+     * (optional) Incremental number.
+     *
+     * @var int
+     */
+    public $incrementalNumber = 1;
+
+
     public function init(){
         parent::init();
 
         if(!isset($this->sortUrl)){
             throw new InvalidConfigException("You must specify the sortUrl");
+        }
+        
+        if(!is_int($this->startNumber)){
+            throw new InvalidConfigException("startNumber must be an integer.");
+        }
+        
+        if(!is_int($this->incrementalNumber)){
+            throw new InvalidConfigException("incrementalNumber must be an integer.");
         }
 
         GridViewAsset::register($this->view);
@@ -83,6 +106,8 @@ class SortableGridView extends GridView {
             'action' => $this->sortUrl,
             'sortingPromptText' => $this->sortingPromptText,
             'sortingFailText' => $this->failText,
+            'startNumber' => $this->startNumber,
+            'incrementalNumber' => $this->incrementalNumber,
             'csrfTokenName' => \Yii::$app->request->csrfParam,
             'csrfToken' => \Yii::$app->request->csrfToken,
         ];
